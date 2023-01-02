@@ -1,12 +1,16 @@
 package by.godevelopment.data;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public interface StringDataSource {
 
     public String getInputDataOrNull();
 
     class BaseImpl implements StringDataSource {
 
-        private String inputData;
+        private final String inputData;
 
         public BaseImpl() {
             inputData = "3-1 2-5 5-1 card-1234";
@@ -23,10 +27,25 @@ public interface StringDataSource {
         }
     }
 
-    class ReadInputFileImpl implements StringDataSource {
+    class ReadFileImpl implements StringDataSource {
+
+        String name = "OrderIn.txt";
+
+        public ReadFileImpl() {
+        }
+
+        public ReadFileImpl(String file) {
+            if (file != null) name = file;
+        }
+
         @Override
         public String getInputDataOrNull() {
-            return null;
+            try (BufferedReader br = new BufferedReader(new FileReader(name))) {
+                return br.readLine();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+                return null;
+            }
         }
     }
 }
