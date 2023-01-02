@@ -4,7 +4,11 @@ import by.godevelopment.data.DiscountItemsDataSource;
 import by.godevelopment.domain.models.DiscountsItem;
 import by.godevelopment.domain.models.Order;
 import by.godevelopment.domain.models.OrderItem;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static by.godevelopment.constants.AppConfig.CARD_LABEL;
 import static by.godevelopment.constants.AppConfig.PARTS_DIVIDER;
 
@@ -19,14 +23,22 @@ public interface CreateOrderUseCase {
         private final ParseStringToOrderItemUseCase parseStringToOrderItemUseCase;
         private final DiscountItemsDataSource discountItemsDataSource;
 
-        public BaseImpl(ParseStringToOrderItemUseCase parseStringToOrderItemUseCase, DiscountItemsDataSource discountItemsDataSource) {
+        public BaseImpl(
+                ParseStringToOrderItemUseCase parseStringToOrderItemUseCase,
+                        DiscountItemsDataSource discountItemsDataSource
+        ) {
             this.parseStringToOrderItemUseCase = parseStringToOrderItemUseCase;
             this.discountItemsDataSource = discountItemsDataSource;
             orderIdState = 0;
             divider = PARTS_DIVIDER;
         }
 
-        public BaseImpl(int lastOrderIdState, String customDivider, ParseStringToOrderItemUseCase parseStringToOrderItemUseCase, DiscountItemsDataSource discountItemsDataSource) {
+        public BaseImpl(
+                int lastOrderIdState,
+                String customDivider,
+                ParseStringToOrderItemUseCase parseStringToOrderItemUseCase,
+                DiscountItemsDataSource discountItemsDataSource
+        ) {
             this.orderIdState = lastOrderIdState;
             this.divider = customDivider;
             this.parseStringToOrderItemUseCase = parseStringToOrderItemUseCase;
@@ -50,7 +62,11 @@ public interface CreateOrderUseCase {
                         if (itemOrNull != null) items.add(itemOrNull);
                     }
                 }
-                if (!items.isEmpty()) return new Order(++orderIdState, discounts, items);
+                if (!items.isEmpty()) return new Order(
+                        ++orderIdState,
+                        discounts,
+                        items
+                );
                 else return null;
             }
         }
