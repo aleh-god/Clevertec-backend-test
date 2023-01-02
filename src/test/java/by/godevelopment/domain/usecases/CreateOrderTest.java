@@ -2,13 +2,14 @@ package by.godevelopment.domain.usecases;
 
 import by.godevelopment.domain.models.DiscountsItem;
 import by.godevelopment.domain.models.Order;
+import by.godevelopment.testsources.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-public class CreateOrderUseCaseTest extends BaseUseCaseTest {
+public class CreateOrderTest extends BaseTest {
     CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase.BaseImpl(
             parseStringToOrderItemUseCase,
             discountItemsDataSource

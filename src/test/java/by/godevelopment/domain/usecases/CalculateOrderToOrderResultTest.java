@@ -1,6 +1,7 @@
 package by.godevelopment.domain.usecases;
 
 import by.godevelopment.domain.models.*;
+import by.godevelopment.testsources.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import static by.godevelopment.domain.usecases.CalculateOrderToOrderResultUseCas
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class CalculateOrderToOrderResultUseCaseTest extends BaseUseCaseTest {
+class CalculateOrderToOrderResultTest extends BaseTest {
     private final CalculateOrderItemToResultItemUseCase calculateOrderItemToResultItemUseCase =
             new CalculateOrderItemToResultItemUseCase.BaseImpl();
     private final CalculateOrderToOrderResultUseCase calculateOrderToOrderResultUseCase =

@@ -2,11 +2,12 @@ package by.godevelopment.domain.usecases;
 
 import by.godevelopment.domain.models.OrderItem;
 import by.godevelopment.domain.models.ResultItem;
+import by.godevelopment.testsources.BaseTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalculateOrderItemToResultItemUseCaseTest extends BaseUseCaseTest {
+class CalculateOrderItemToResultItemTest extends BaseTest {
 
     private final CalculateOrderItemToResultItemUseCase calculateOrderItemToResultItemUseCase = new CalculateOrderItemToResultItemUseCase.BaseImpl();
 

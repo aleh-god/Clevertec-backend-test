@@ -1,11 +1,12 @@
 package by.godevelopment.domain.usecases;
 
 import by.godevelopment.domain.models.OrderItem;
+import by.godevelopment.testsources.BaseTest;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class ParseStringToOrderItemUseCaseTest extends BaseUseCaseTest {
+public class ParseStringToOrderItemTest extends BaseTest {
 
     @Test
     public void parseStringToOrderItem_IsCorrect() {
