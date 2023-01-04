@@ -4,15 +4,14 @@ import by.godevelopment.domain.models.Receipt;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public interface PrintReceiptBehaviour {
 
-    public void printReceipt(Receipt receipt);
+    public void invoke(Receipt receipt) throws IllegalStateException;
 
     class BaseImpl implements PrintReceiptBehaviour {
         @Override
-        public void printReceipt(Receipt receipt) {
+        public void invoke(Receipt receipt) throws IllegalStateException {
             if (receipt !=null) {
                 receipt.lines().forEach(System.out::println);
             }
@@ -22,9 +21,10 @@ public interface PrintReceiptBehaviour {
 
     class WriteFileImpl implements PrintReceiptBehaviour {
 
-        String name = "ReceiptOut.txt";
+        String name;
 
         public WriteFileImpl() {
+            name = "ReceiptOut.txt";
         }
 
         public WriteFileImpl(String file) {
@@ -32,7 +32,7 @@ public interface PrintReceiptBehaviour {
         }
 
         @Override
-        public void printReceipt (Receipt receipt){
+        public void invoke(Receipt receipt) throws IllegalStateException {
 
             if (receipt !=null) {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(name))) {
@@ -40,8 +40,8 @@ public interface PrintReceiptBehaviour {
                         bw.write(s);
                         bw.newLine();
                     }
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
+                } catch (Exception e) {
+                    throw new IllegalStateException();
                 }
             }
             else throw new IllegalStateException();

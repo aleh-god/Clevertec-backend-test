@@ -31,16 +31,16 @@ class PrintReceiptBehaviourTest extends BaseTest {
     }
 
     @Test
-    void printReceipt_passNull_returnNull() {
+    void printReceipt_passNull_returnException() {
         assertThrows(IllegalStateException.class, () -> {
-            printReceiptBehaviour.printReceipt(null);
+            printReceiptBehaviour.invoke(null);
         });
     }
 
     @Test
     void printReceipt_passErrorMessage_isCorrect() {
 
-        printReceiptBehaviour.printReceipt(new Receipt(
+        printReceiptBehaviour.invoke(new Receipt(
                 -1,
                 List.of(ERROR_MESSAGE)
         ));
@@ -70,7 +70,7 @@ class PrintReceiptBehaviourTest extends BaseTest {
                 expected
         );
 
-        printReceiptBehaviour.printReceipt(receipt);
+        printReceiptBehaviour.invoke(receipt);
         List<String> actual = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(name))) {
