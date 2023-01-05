@@ -5,6 +5,8 @@ import by.godevelopment.domain.models.Receipt;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+import static by.godevelopment.constants.AppConfig.DEFAULT_WRITE_FILE_NAME;
+
 public interface PrintReceiptBehaviour {
 
     public void invoke(Receipt receipt) throws IllegalStateException;
@@ -24,7 +26,7 @@ public interface PrintReceiptBehaviour {
         String name;
 
         public WriteFileImpl() {
-            name = "ReceiptOut.txt";
+            name = DEFAULT_WRITE_FILE_NAME;
         }
 
         public WriteFileImpl(String file) {

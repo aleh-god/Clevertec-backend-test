@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static by.godevelopment.constants.AppConfig.DEFAULT_ORDER;
+import static by.godevelopment.constants.AppConfig.DEFAULT_READ_FILE_NAME;
+
 public interface StringDataSource {
 
     public String getInputDataOrNull();
@@ -13,7 +16,7 @@ public interface StringDataSource {
         private final String inputData;
 
         public BaseImpl() {
-            inputData = "3-1 2-5 5-1 card-1234";
+            inputData = DEFAULT_ORDER;
         }
 
         public BaseImpl(String inputData) {
@@ -29,9 +32,10 @@ public interface StringDataSource {
 
     class ReadFileImpl implements StringDataSource {
 
-        String name = "OrderIn.txt";
+        String name;
 
         public ReadFileImpl() {
+            name = DEFAULT_READ_FILE_NAME;
         }
 
         public ReadFileImpl(String file) {
