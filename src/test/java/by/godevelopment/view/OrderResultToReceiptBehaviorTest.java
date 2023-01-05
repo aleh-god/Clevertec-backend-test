@@ -42,8 +42,8 @@ class OrderResultToReceiptBehaviorTest extends BaseTest {
         Receipt expected = new Receipt(
                 1,
                 List.of("Receipt #1",
-                        "QTY  Description Price  Total",
-                        "1  Muesli  1.25  1.25", "5  Fresh milk  with -10%  0.5  2.25", "1  Potatoes  0.34  0.34",
+                        "QTY  Description  Price  Total",
+                        "1  Muesli  1.25  1.25", "5  Fresh milk with -10%  0.5  2.25", "1  Potatoes  0.34  0.34",
                         "##############################",
                         "Total: 3.84",
                         "Total with discount: 3.84")
@@ -67,11 +67,11 @@ class OrderResultToReceiptBehaviorTest extends BaseTest {
         Receipt expected = new Receipt(
                 1,
                 List.of("Receipt #1",
-                        "QTY Description Price Total",
-                        "1  Muesli  1.25  1.25", "5  Fresh milk  with -10%  0.5  2.25", "1  Potatoes  0.34  0.34",
+                        "QTY  Description  Price  Total",
+                        "1  Muesli  1.25  1.25", "5  Fresh milk with -10%  0.5  2.25", "1  Potatoes  0.34  0.34",
                         "##############################",
                         "Total: 3.84",
-                        "Discount: card-1234 15%",
+                        "Discount: card-1234  15%",
                         "Total with discount: 3.26")
         );
 

@@ -17,10 +17,9 @@ public class BaseTest {
     protected DiscountItemsDataSource discountItemsDataSource = new DiscountItemsDataSource.BaseImpl();
 
     protected StoreItemsDataSource storeItemsDataSource = new StoreItemsDataSource.BaseImpl();
-    protected List<Integer> ids = storeItemsDataSource.getStoreItemsId();
     protected ParseStringToOrderItemUseCase parseStringToOrderItemUseCase = new ParseStringToOrderItemUseCase.BaseImpl(
             ParseStringToOrderItemUseCase.SEPARATOR,
-            new ValidateOrderItemIdInStoreUseCase.BaseImpl(ids),
+            new ValidateOrderItemIdInStoreUseCase.BaseImpl(storeItemsDataSource),
             new StoreItemsDataSource.BaseImpl()
     );
 
