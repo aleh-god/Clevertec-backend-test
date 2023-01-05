@@ -8,16 +8,25 @@ import by.godevelopment.domain.models.Receipt;
 
 public class Main {
     public static void main(String[] args) {
+
+        String fileNameIn = null;
+        String fileNameOut = null;
+        ServiceLocator serviceLocator;
+
         try {
             System.out.println("Demo is starting.");
-
-            String fileNameIn = args[0];
-            String fileNameOut = args[1];
+            fileNameIn = args[0];
+            fileNameOut = args[1];
             System.out.println("Have taken args:" + fileNameIn + " " + fileNameOut);
-            ServiceLocator serviceLocator = new ServiceLocatorImpl(fileNameIn, fileNameOut);
+        } catch (Exception e) {
+            System.out.println("Error: Init arguments is empty!");
+        } finally {
+            serviceLocator = new ServiceLocatorImpl(fileNameIn, fileNameOut);
             System.out.println("DataSources have created.");
             System.out.println("Utils have created.");
+        }
 
+        try {
             String inputData = serviceLocator.provideStringDataSource().getInputDataOrNull();
             Order order = serviceLocator.provideCreateOrderUseCase().createOrderOrReturnNull(inputData);
             OrderResult orderResult = serviceLocator.provideCalculateOrderToOrderResultUseCase().calculateOrNull(order);
