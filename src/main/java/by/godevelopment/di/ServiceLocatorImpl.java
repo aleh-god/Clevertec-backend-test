@@ -21,7 +21,10 @@ public class ServiceLocatorImpl implements ServiceLocator {
             stringDataSource = new StringDataSource.ReadFileImpl(fileNameIn);
             printReceiptBehaviour = new PrintReceiptBehaviour.WriteFileImpl(fileNameOut);
         }
-        else throw new IllegalArgumentException();
+        else {
+            stringDataSource = new StringDataSource.ReadFileImpl();
+            printReceiptBehaviour = new PrintReceiptBehaviour.WriteFileImpl();
+        }
 
         storeItemsDataSource = new StoreItemsDataSource.BaseImpl();
         discountItemsDataSource = new DiscountItemsDataSource.BaseImpl();
