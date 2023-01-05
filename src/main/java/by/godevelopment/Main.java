@@ -1,49 +1,32 @@
 package by.godevelopment;
 
-import by.godevelopment.data.DiscountItemsDataSource;
-import by.godevelopment.data.StoreItemsDataSource;
-import by.godevelopment.data.StringDataSource;
+import by.godevelopment.di.ServiceLocator;
+import by.godevelopment.di.ServiceLocatorImpl;
 import by.godevelopment.domain.models.Order;
 import by.godevelopment.domain.models.OrderResult;
 import by.godevelopment.domain.models.Receipt;
-import by.godevelopment.domain.usecases.*;
-import by.godevelopment.view.OrderResultToReceiptBehavior;
-import by.godevelopment.view.PrintReceiptBehaviour;
-
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        try {
+            System.out.println("Demo is starting.");
 
-        StoreItemsDataSource storeItemsDataSource = new StoreItemsDataSource.BaseImpl();
-        List<Integer> storeItemsId = storeItemsDataSource.getStoreItemsId();
-        ValidateOrderItemIdInStoreUseCase validateUseCase = new ValidateOrderItemIdInStoreUseCase.BaseImpl(storeItemsId);
+            String fileNameIn = args[0];
+            String fileNameOut = args[1];
+            System.out.println("Have taken args:" + fileNameIn + " " + fileNameOut);
+            ServiceLocator serviceLocator = new ServiceLocatorImpl(fileNameIn, fileNameOut);
+            System.out.println("DataSources have created.");
+            System.out.println("Utils have created.");
 
-
-        ParseStringToOrderItemUseCase parseStringToOrderItemUseCase = new ParseStringToOrderItemUseCase.BaseImpl(
-                ParseStringToOrderItemUseCase.SEPARATOR,
-                validateUseCase,
-                storeItemsDataSource
-        );
-        DiscountItemsDataSource discountItemsDataSource =  new DiscountItemsDataSource.BaseImpl();
-
-        CreateOrderUseCase createOrderUseCase = new CreateOrderUseCase.BaseImpl(
-                parseStringToOrderItemUseCase,
-                discountItemsDataSource
-        );
-
-        String inputData = new StringDataSource.BaseImpl().getInputDataOrNull();
-        Order order = createOrderUseCase.createOrderOrReturnNull(inputData);
-
-        CalculateOrderItemToResultItemUseCase calculateOrderItemToResultItemUseCase = new CalculateOrderItemToResultItemUseCase.BaseImpl();
-        CalculateOrderToOrderResultUseCase calculateOrderToOrderResultUseCase = new CalculateOrderToOrderResultUseCase.BaseImpl(calculateOrderItemToResultItemUseCase);
-        OrderResult orderResult = calculateOrderToOrderResultUseCase.calculateOrderResultToOrderOrNull(order);
-
-        OrderResultToReceiptBehavior orderResultToReceiptBehavior = new OrderResultToReceiptBehavior.BaseImpl();
-        Receipt receipt = orderResultToReceiptBehavior.invoke(orderResult);
-
-        PrintReceiptBehaviour printReceiptBehaviour = new PrintReceiptBehaviour.BaseImpl();
-        printReceiptBehaviour.printReceipt(receipt);
+            String inputData = serviceLocator.provideStringDataSource().getInputDataOrNull();
+            Order order = serviceLocator.provideCreateOrderUseCase().createOrderOrReturnNull(inputData);
+            OrderResult orderResult = serviceLocator.provideCalculateOrderToOrderResultUseCase().calculateOrNull(order);
+            Receipt receipt = serviceLocator.provideOrderResultToReceiptBehavior().invoke(orderResult);
+            serviceLocator.providePrintReceiptBehaviour().invoke(receipt);
+        } catch (Exception e) {
+            System.out.println("Demo has crashed! Error: " + e.getMessage());
+        } finally {
+            System.out.println("Demo has ended!");
+        }
     }
 }
