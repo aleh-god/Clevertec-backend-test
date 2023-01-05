@@ -34,8 +34,10 @@ public interface ParseStringToOrderItemUseCase {
                     if (parts.length == 2) {
                         int id = Integer.parseInt(parts[0]);
                         int quantity = Integer.parseInt(parts[1]);
-                        StoreItem item = storeItemsDataSource.getStoreItemByIdOrNull(id);
-                        if (validateUseCase.validateBy(id) && quantity > 0) return new OrderItem(item, quantity);
+                        if (validateUseCase.validateBy(id) && quantity > 0) {
+                            StoreItem item = storeItemsDataSource.getStoreItemByIdOrNull(id);
+                            return new OrderItem(item, quantity);
+                        }
                         else return null;
                     } else return null;
                 } else return null;
