@@ -1,6 +1,6 @@
 package by.godevelopment.domain.usecases;
 
-import java.util.List;
+import by.godevelopment.data.StoreItemsDataSource;
 
 public interface ValidateOrderItemIdInStoreUseCase {
 
@@ -8,15 +8,15 @@ public interface ValidateOrderItemIdInStoreUseCase {
 
     class BaseImpl implements ValidateOrderItemIdInStoreUseCase {
 
-        private final List<Integer> storeItemsId;
+        private final StoreItemsDataSource storeItemsDataSource;
 
-        public BaseImpl(List<Integer> storeItemsId) {
-            this.storeItemsId = storeItemsId;
+        public BaseImpl(StoreItemsDataSource storeItemsDataSource) {
+            this.storeItemsDataSource = storeItemsDataSource;
         }
 
         @Override
         public Boolean validateBy(int id) {
-            return storeItemsId.contains(id);
+            return storeItemsDataSource.contains(id);
         }
     }
 }
