@@ -2,7 +2,7 @@
 Develop a console application that implements the functionality of generating a receipt in a store.
 
 ## Technologies stack:
-- Java, MVC, SOLID;
+- Java, JUnit, MVC, SOLID, TDD;
 
 ## Demo:
 - Input
@@ -11,7 +11,7 @@ Develop a console application that implements the functionality of generating a 
 
 - Output
 
-Receipt #1
+Receipt #1<br>
 QTY  Description  Price  Total<br>
 1  Coca-cola  1.0  1.00<br>
 2  Fresh milk  0.5  1.00<br>
