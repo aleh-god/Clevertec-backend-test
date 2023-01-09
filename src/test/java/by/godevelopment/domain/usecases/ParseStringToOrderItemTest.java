@@ -1,20 +1,24 @@
 package by.godevelopment.domain.usecases;
 
 import by.godevelopment.domain.models.OrderItem;
-import by.godevelopment.domain.models.StoreItem;
+import by.godevelopment.testsources.BaseTest;
 import org.junit.jupiter.api.Test;
-import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class ParseStringToOrderItemUseCaseTest extends BaseUseCaseTest {
+public class ParseStringToOrderItemTest extends BaseTest {
 
     @Test
     public void parseStringToOrderItem_IsCorrect() {
-        StoreItem storeItem = new StoreItem(1, "Coca-cola", BigDecimal.valueOf(1.00));
-        OrderItem expected = new OrderItem(storeItem, 2);
-        OrderItem actual = parseStringToOrderItemUseCase.parseStringToOrderItemOrNull("1-2");
+        OrderItem expected = orderItem_2_5;
+        OrderItem actual = parseStringToOrderItemUseCase.parseStringToOrderItemOrNull("2-5");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseStringToOrderItem_inputZeroQuantity_ReturnNull() {
+        OrderItem actual = parseStringToOrderItemUseCase.parseStringToOrderItemOrNull("2-0");
+        assertNull(actual);
     }
 
     @Test

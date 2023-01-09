@@ -1,0 +1,11 @@
+Receipt #1
+QTY  Description  Price  Total
+1  Coca-cola  1.0  1.00
+2  Fresh milk  0.5  1.00
+3  Muesli  1.25  3.75
+4  Pork leg steak  2.99  11.96
+5  Potatoes with -10%  0.34  1.53
+##############################
+Total: 19.24
+Discount: card-1234  15%
+Total with discount: 16.35

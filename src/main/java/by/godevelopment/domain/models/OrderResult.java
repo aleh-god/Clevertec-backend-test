@@ -7,7 +7,6 @@ public record OrderResult (
         int header,
         List<ResultItem> resultItems,
         BigDecimal total,
-        DiscountsItem  rateDiscount,
+        DiscountsItem discountRate,
         BigDecimal totalWithDiscount
-) {
-}
+) { }
